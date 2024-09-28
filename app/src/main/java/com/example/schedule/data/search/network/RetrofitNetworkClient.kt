@@ -1,56 +1,34 @@
-package com.example.schedule.data.search.network;
+package com.example.schedule.data.search.network
 
-import android.util.Log;
+import com.example.schedule.data.dto.Response
+import com.example.schedule.data.dto.ScheduleBetweenRequest
+import com.example.schedule.data.search.NetworkClient
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-import com.example.schedule.data.dto.Response;
-import com.example.schedule.data.dto.ScheduleBetweenRequest;
-import com.example.schedule.data.dto.ScheduleBetweenResponse;
-import com.example.schedule.data.search.NetworkClient;
+class RetrofitNetworkClient(
+    private val scheduleApi: ScheduleApi,
+): NetworkClient {
 
-import java.io.IOException;
-
-import retrofit2.Call;
-
-public class RetrofitNetworkClient implements NetworkClient {
-
-    private final ScheduleApi service;
-
-    public RetrofitNetworkClient(ScheduleApi service) {
-        this.service = service;
-    }
-
-    @Override
-    public <T> Response doRequest(T dto) {
-        if (dto instanceof ScheduleBetweenRequest) {
-            ScheduleBetweenRequest categoryRequest = (ScheduleBetweenRequest) dto;
-            Call<ScheduleBetweenResponse> call = service.getScheduleByStationCodeAndDate(
-                    "",
-                    categoryRequest.fromCode,
-                    categoryRequest.toCode,
-                    categoryRequest.date,
-                    categoryRequest.transportTypes,
-                    ""
-                    );
-            try {
-                Response<ScheduleBetweenResponse> response = call.execute();
-                ScheduleBetweenResponse body = response.body();
-                if (body != null) {
-                    Log.i("Request", "${response.code()}");
-                    body.setResultCode(response.code());
-                    return (R) body;
-                } else {
-                    CategoryResponse emptyResponse = new CategoryResponse();
-                    emptyResponse.setResultCode(response.code());
-                    return (R) emptyResponse;
+    override suspend fun doRequest(dto: Any): Response {
+        return when (dto) {
+            is ScheduleBetweenRequest -> {
+                return withContext(Dispatchers.IO) {
+                    try {
+                        val response = scheduleApi.getScheduleByStationCodeAndDate(
+                            fromCode = dto.fromCode,
+                            toCode = dto.toCode,
+                            date = dto.date
+                            )
+                        response.apply { resultCode = 200 }
+                    } catch (e: Throwable) {
+                        Response().apply { resultCode = 500 }
+                    }
                 }
-            } catch (IOException e) {
-                Log.e("NetworkError", "Network error: " + e.getMessage());
-                return null;
             }
-        } else {
-            CategoryResponse errorResponse = new CategoryResponse();
-            errorResponse.setResultCode(400);
-            return (R) errorResponse;
+            else -> {
+                Response().apply { resultCode = 400 }
+            }
         }
     }
 }

@@ -1,11 +1,7 @@
-package com.example.schedule.data.dto;
+package com.example.schedule.data.dto
 
-import lombok.Data;
-
-@Data
-public class ScheduleBetweenRequest {
-    public String fromCode;
-    public String toCode;
-    public String date;
-    public String transportTypes;
-}
+data class ScheduleBetweenRequest(
+    val fromCode: String,
+    val toCode: String,
+    val date: String,
+)

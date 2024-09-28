@@ -1,20 +1,16 @@
-package com.example.schedule.ui.root;
+package com.example.schedule.ui.root
 
-import android.os.Bundle;
-import android.view.View;
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.schedule.databinding.ActivityRootBinding
 
-import androidx.appcompat.app.AppCompatActivity;
-import com.example.schedule.databinding.ActivityRootBinding;
+class RootActivity : AppCompatActivity() {
 
-public class RootActivity extends AppCompatActivity {
+    private lateinit var binding: ActivityRootBinding
 
-    private ActivityRootBinding binding;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityRootBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityRootBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }

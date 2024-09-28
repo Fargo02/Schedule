@@ -1,5 +1,7 @@
-package com.example.schedule.data.dto;
+package com.example.schedule.data.dto
 
-public class Response {
-    public int code = 0;
+import retrofit2.http.Query
+
+open class Response() {
+    var resultCode = 0
 }

@@ -1,19 +1,17 @@
-package com.example.schedule.data.search.network;
+package com.example.schedule.data.search.network
 
-import com.example.schedule.data.dto.ScheduleBetweenResponse;
+import com.example.schedule.data.dto.ScheduleBetweenResponse
+import retrofit2.http.GET
+import retrofit2.http.Query
 
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
+interface ScheduleApi {
 
-public interface ScheduleApi {
     @GET("./search/?transport_types=suburban")
-    Call<ScheduleBetweenResponse> getScheduleByStationCodeAndDate(
-            @Query("apikey") String apikey,
-            @Query("from") String fromCode,
-            @Query("to") String toCode,
-            @Query("date") String date,
-            @Query("transport_types") String transportTypes,
-            @Query("lang") String lang
-    );
+    suspend fun getScheduleByStationCodeAndDate(
+        @Query("apikey") apikey: String = "2c748246-2b5d-45f6-8881-d72f287f28f1",
+        @Query("from") fromCode: String,
+        @Query("to") toCode: String,
+        @Query("date") date: String,
+    ): ScheduleBetweenResponse
+
 }

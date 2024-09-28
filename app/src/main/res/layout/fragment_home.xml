@@ -21,8 +21,17 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/mark_16dp" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/listGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_tags="schedule, btn_today, btn_tomorrow,
+        btn_date, btn_any, btn_plane, btn_train, btn_suburban, btn_bus, btn_found"/>
+
     <TextView
         android:id="@+id/schedule"
+        app:layout_constraintTag="schedule"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/mark_16dp"
@@ -112,6 +121,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_today"
+        app:layout_constraintTag="btn_today"
         android:layout_width="@dimen/mark_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/mark_16dp"
@@ -126,6 +136,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_tomorrow"
+        app:layout_constraintTag="btn_tomorrow"
         android:layout_width="@dimen/mark_0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_without_radius"
@@ -139,6 +150,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_date"
+        app:layout_constraintTag="btn_date"
         android:layout_width="@dimen/mark_0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_end_radius"
@@ -155,6 +167,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_any"
+        app:layout_constraintTag="btn_any"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/mark_16dp"
@@ -171,6 +184,7 @@
 
     <ImageButton
         android:id="@+id/btn_plane"
+        app:layout_constraintTag="btn_plane"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/plane_ic"
@@ -185,6 +199,7 @@
 
     <ImageButton
         android:id="@+id/btn_train"
+        app:layout_constraintTag="btn_train"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/suburban_ic"
@@ -199,6 +214,7 @@
 
     <ImageButton
         android:id="@+id/btn_suburban"
+        app:layout_constraintTag="btn_suburban"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/suburban_ic"
@@ -213,6 +229,7 @@
 
     <ImageButton
         android:id="@+id/btn_bus"
+        app:layout_constraintTag="btn_bus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/bus_ic"
@@ -227,6 +244,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_found"
+        app:layout_constraintTag="btn_found"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/mark_16dp"
@@ -239,6 +257,30 @@
         app:layout_constraintStart_toEndOf="@id/left_guideline_16dp"
         app:layout_constraintEnd_toStartOf="@id/right_guideline_16dp"
         app:layout_constraintTop_toBottomOf="@id/btn_any" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/routeList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mark_16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="13"
+        tools:listitem="@layout/result_item"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintTop_toBottomOf="@id/btn_found"
+        app:layout_constraintStart_toEndOf="@id/left_guideline_16dp"
+        app:layout_constraintEnd_toStartOf="@id/right_guideline_16dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="@dimen/mark_44dp"
+        android:layout_height="@dimen/mark_44dp"
+        android:indeterminateTint="@color/yellow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

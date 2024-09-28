@@ -1,6 +1,6 @@
 package com.example.schedule.domain.api
 
-import com.example.schedule.domain.model.StationAndDate
+import com.example.schedule.domain.model.StationInfo
 import kotlinx.coroutines.flow.Flow
 
 interface ScheduleBetweenInteractor {
@@ -8,5 +8,5 @@ interface ScheduleBetweenInteractor {
         fromCode: String,
         toCode: String,
         date: String, )
-    : Flow<Pair<List<StationAndDate>?, String?>>
+    : Flow<Pair<List<StationInfo>?, String?>>
 }

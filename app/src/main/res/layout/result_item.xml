@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:paddingHorizontal="@dimen/mark_8dp"
     android:paddingVertical="@dimen/mark_8dp">
 
     <androidx.constraintlayout.widget.Guideline
@@ -27,14 +26,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="270dp" />
+        app:layout_constraintGuide_percent="0.66" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_83"
+        android:id="@+id/guideline_82"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.83" />
+        app:layout_constraintGuide_percent="0.82" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/text_barrier"
@@ -151,7 +150,7 @@
         android:textFontWeight="500"
         android:textSize="@dimen/mark_12sp"
         app:layout_constraintStart_toStartOf="@id/guideline_66"
-        app:layout_constraintEnd_toStartOf="@id/guideline_83"
+        app:layout_constraintEnd_toStartOf="@id/guideline_82"
         app:layout_constraintTop_toTopOf="@id/start_time"/>
 
     <TextView
@@ -166,7 +165,7 @@
         android:textFontWeight="500"
         android:textSize="@dimen/mark_12sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guideline_83"
+        app:layout_constraintStart_toStartOf="@id/guideline_82"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -181,7 +180,7 @@
         android:textFontWeight="500"
         android:textSize="@dimen/mark_16sp"
         app:layout_constraintTop_toBottomOf="@id/end_date"
-        app:layout_constraintStart_toStartOf="@id/guideline_83"
+        app:layout_constraintStart_toStartOf="@id/guideline_82"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -196,7 +195,7 @@
         android:textFontWeight="500"
         android:textSize="@dimen/mark_12sp"
         app:layout_constraintTop_toBottomOf="@id/end_time"
-        app:layout_constraintStart_toStartOf="@id/guideline_83"
+        app:layout_constraintStart_toStartOf="@id/guideline_82"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,5 +4,5 @@ import com.example.schedule.domain.model.StationCode
 import kotlinx.coroutines.flow.Flow
 
 interface StationCodeRepository {
-    fun getStationCode(stationName: String): Flow<List<StationCode>>
+    fun getStationCode(stationName: String): Flow<StationCode>
 }

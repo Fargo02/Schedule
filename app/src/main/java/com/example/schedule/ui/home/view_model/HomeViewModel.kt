@@ -1,5 +1,6 @@
 package com.example.schedule.ui.home.view_model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,9 +33,16 @@ class HomeViewModel(
         }
     }
 
-    fun getStationCode(stationName: String) {
-        stationCodeInteractor.historyMovies()
-    }
+//    fun getStationCode(stationName: String) {
+//
+//        viewModelScope.launch {
+//            stationCodeInteractor
+//                .getStationCode(stationName)
+//                .collect{ station ->
+//                    code = station.yandexCode
+//                }
+//        }
+//    }
 
     private fun processResult(foundRoutes: List<StationInfo>?, errorMessage: String?) {
         val routes = mutableListOf<StationInfo>()
@@ -45,12 +53,10 @@ class HomeViewModel(
 
         when {
             errorMessage != null -> {
-                renderState(
-                    SearchState.Error
-                )
+                renderState(SearchState.Error)
             }
             routes.isEmpty() -> {
-                SearchState.Empty
+                renderState(SearchState.Empty)
             }
             else -> {
                 renderState(

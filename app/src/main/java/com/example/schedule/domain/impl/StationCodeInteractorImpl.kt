@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class StationCodeInteractorImpl(
     private val stationCodeRepository: StationCodeRepository
 ): StationCodeInteractor {
-    override fun getStationCode(stationName: String): Flow<List<StationCode>> {
+    override fun getStationCode(stationName: String): Flow<StationCode> {
         return stationCodeRepository.getStationCode(stationName)
     }
 }

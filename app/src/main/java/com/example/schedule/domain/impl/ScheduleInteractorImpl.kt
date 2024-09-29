@@ -2,6 +2,7 @@ package com.example.schedule.domain.impl
 
 import com.example.schedule.domain.api.ScheduleInteractor
 import com.example.schedule.domain.api.ScheduleRepository
+import com.example.schedule.domain.model.StationCode
 import com.example.schedule.domain.model.StationInfo
 import com.example.schedule.utils.Resource
 import kotlinx.coroutines.flow.Flow
@@ -31,6 +32,10 @@ class ScheduleInteractorImpl(
                 }
             }
         }
+    }
+
+    override fun getAllStations(): Flow<Resource<List<StationCode>>> {
+        return repository.getAllStations()
     }
 
 }

@@ -4,7 +4,7 @@ import androidx.room.Room
 import com.example.schedule.data.search.NetworkClient
 import com.example.schedule.data.search.network.RetrofitNetworkClient
 import com.example.schedule.data.search.network.ScheduleApi
-import com.practicum.mymovies.data.db.AppDatabase
+import com.example.schedule.data.db.AppDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -24,7 +24,7 @@ val dataModule = module {
         RetrofitNetworkClient(get())
     }
 
-    single {
+    factory {
         Room.databaseBuilder(androidContext(), AppDatabase::class.java, "database.db")
             .build()
     }

@@ -9,7 +9,7 @@ import com.example.schedule.domain.model.StationCode
 import com.example.schedule.domain.model.StationInfo
 import com.example.schedule.utils.Resource
 import com.practicum.mymovies.data.converters.StationDbConvertor
-import com.practicum.mymovies.data.db.AppDatabase
+import com.example.schedule.data.db.AppDatabase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.text.SimpleDateFormat
@@ -80,8 +80,6 @@ class ScheduleRepositoryImpl(
                                         esrCode = station.codes.esr_code,
                                         yandexCode = station.codes.yandex_code,
                                         direction = station.direction,
-                                        latitude = station.latitude,
-                                        longitude = station.longitude,
                                         stationType = station.station_type,
                                         title = station.title,
                                         transportType = station.transport_type,

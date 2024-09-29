@@ -13,5 +13,5 @@ interface ScheduleDao {
     suspend fun insertSchedules(schedules: List<ScheduleEntity>)
 
     @Query("SELECT * FROM schedule_table WHERE station_name = :search")
-    suspend fun getScheduleByName(search: String): List<ScheduleEntity>
+    suspend fun getScheduleByName(search: String): ScheduleEntity
 }

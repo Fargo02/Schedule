@@ -1,4 +1,4 @@
-package com.practicum.mymovies.data.db
+package com.example.schedule.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

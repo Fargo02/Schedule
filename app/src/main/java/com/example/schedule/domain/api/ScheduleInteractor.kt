@@ -1,6 +1,8 @@
 package com.example.schedule.domain.api
 
+import com.example.schedule.domain.model.StationCode
 import com.example.schedule.domain.model.StationInfo
+import com.example.schedule.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface ScheduleInteractor {
@@ -10,4 +12,6 @@ interface ScheduleInteractor {
         date: String,
         transportTypes: String)
     : Flow<Pair<List<StationInfo>?, String?>>
+
+    fun getAllStations(): Flow<Resource<List<StationCode>>>
 }

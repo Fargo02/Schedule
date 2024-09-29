@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id ("kotlin-kapt")
 }
 
 android {
@@ -36,6 +37,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -48,15 +52,14 @@ dependencies {
     implementation ("androidx.navigation:navigation-ui-ktx:2.5.3")
     implementation ("androidx.fragment:fragment-ktx:1.8.2")
 
-
-
     implementation(libs.koin.android)
     implementation(libs.core.ktx)
 
-    //Room
-    implementation(libs.room.runtime)
-    compileOnly(libs.room.compiler)
-    implementation(libs.room.ktx)
+
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+
 
     implementation(libs.appcompat)
     implementation(libs.material)

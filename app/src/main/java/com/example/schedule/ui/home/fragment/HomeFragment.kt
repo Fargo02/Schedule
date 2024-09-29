@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,10 +37,10 @@ class HomeFragment: Fragment(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var datePickerDialog: DatePickerDialog
 
-    private lateinit var date: String
+    private var date: String = ""
     private var fromCode: String = ""
     private var toCode: String = ""
-    private lateinit var transportType: String
+    private  var transportType: String = ""
 
     private lateinit var textWatcherFrom: TextWatcher
     private lateinit var textWatcherTo: TextWatcher
@@ -95,7 +96,12 @@ class HomeFragment: Fragment(), DatePickerDialog.OnDateSetListener {
         binding.btnBus.setOnClickListener{ transportType = "Bus" }
 
         binding.btnFound.setOnClickListener {
-            viewModel.requestToServer("s9879631", "s9600771", date, transportType)
+            if (date.isEmpty() || transportType.isEmpty()) {
+                binding.nothingFound.isVisible = true
+                binding.nothingFound.text = "Указаны не все данные"
+            } else {
+                viewModel.requestToServer("s9879631", "s9600771", date, transportType)
+            }
         }
         //toCode = s9879631
 
@@ -141,6 +147,7 @@ class HomeFragment: Fragment(), DatePickerDialog.OnDateSetListener {
         binding.listGroup.isVisible = false
         binding.progressBar.isVisible = true
         binding.routeList.isVisible = false
+        binding.nothingFound.isVisible = false
     }
 
     private fun showContent(routes: List<StationInfo>) {
@@ -153,11 +160,13 @@ class HomeFragment: Fragment(), DatePickerDialog.OnDateSetListener {
     }
 
     private fun showError() {
-
+        Log.e("RequestError", "Какая-то ошибка")
     }
 
     private fun showEmpty() {
         binding.listGroup.isVisible = true
+        binding.progressBar.isVisible = false
+        binding.nothingFound.isVisible = true
     }
 
     private fun showCalendar() {

@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:constraint_referenced_tags="schedule, btn_today, btn_tomorrow,
+        app:constraint_referenced_tags="btn_today, btn_tomorrow,
         btn_date, btn_any, btn_plane, btn_train, btn_suburban, btn_bus, btn_found"/>
 
     <TextView
@@ -41,7 +41,8 @@
         android:textFontWeight="800"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/left_guideline_16dp"
-        app:layout_constraintEnd_toStartOf="@id/right_guideline_16dp"/>
+        app:layout_constraintEnd_toStartOf="@id/right_guideline_16dp"
+        android:visibility="visible"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/from_to"
@@ -84,11 +85,11 @@
             android:layout_marginStart="@dimen/mark_12dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintTop_toBottomOf="@id/edit_text_from"
-            app:layout_constraintBottom_toTopOf="@id/edit_text_where"
+            app:layout_constraintBottom_toTopOf="@id/edit_text_to"
             app:layout_constraintStart_toStartOf="@id/left_guideline_10dp"
             app:layout_constraintEnd_toStartOf="@id/compare_arrows"/>
         <EditText
-            android:id="@+id/edit_text_where"
+            android:id="@+id/edit_text_to"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="text"

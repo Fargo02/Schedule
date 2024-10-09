@@ -4,5 +4,8 @@ import com.example.schedule.domain.model.StationCode
 import kotlinx.coroutines.flow.Flow
 
 interface StationCodeInteractor {
-    fun getStationCode(stationName: String): Flow<StationCode>
+    suspend fun getStationCode(
+        stationNameFrom: String,
+        stationNameTo: String
+    ): Flow<Pair<StationCode, StationCode>>
 }

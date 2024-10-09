@@ -1,4 +1,4 @@
-package com.practicum.mymovies.data.db.dao
+package com.example.schedule.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

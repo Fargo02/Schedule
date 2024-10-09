@@ -6,9 +6,13 @@ import com.example.schedule.domain.model.StationCode
 import kotlinx.coroutines.flow.Flow
 
 class StationCodeInteractorImpl(
-    private val stationCodeRepository: StationCodeRepository
+    private val repository: StationCodeRepository
 ): StationCodeInteractor {
-    override fun getStationCode(stationName: String): Flow<StationCode> {
-        return stationCodeRepository.getStationCode(stationName)
+
+    override suspend fun getStationCode(
+        stationNameFrom: String,
+        stationNameTo: String
+    ): Flow<Pair<StationCode, StationCode>> {
+        return repository.getStationCode(stationNameFrom, stationNameTo)
     }
 }

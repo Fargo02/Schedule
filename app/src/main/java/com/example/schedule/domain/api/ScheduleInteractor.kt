@@ -13,5 +13,5 @@ interface ScheduleInteractor {
         transportTypes: String)
     : Flow<Pair<List<StationInfo>?, String?>>
 
-    fun getAllStations(): Flow<Resource<List<StationCode>>>
+    suspend fun getAllStations()
 }

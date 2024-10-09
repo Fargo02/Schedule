@@ -34,8 +34,8 @@ class ScheduleInteractorImpl(
         }
     }
 
-    override fun getAllStations(): Flow<Resource<List<StationCode>>> {
-        return repository.getAllStations()
+    override suspend fun getAllStations() {
+        repository.getAllStations()
     }
 
 }

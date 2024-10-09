@@ -1,5 +1,6 @@
 package com.example.schedule.data.search
 
+import android.util.Log
 import com.example.schedule.data.db.entity.AllScheduleRequest
 import com.example.schedule.data.db.entity.AllScheduleResponse
 import com.example.schedule.data.dto.ScheduleRequest
@@ -8,7 +9,7 @@ import com.example.schedule.domain.api.ScheduleRepository
 import com.example.schedule.domain.model.StationCode
 import com.example.schedule.domain.model.StationInfo
 import com.example.schedule.utils.Resource
-import com.practicum.mymovies.data.converters.StationDbConvertor
+import com.example.schedule.data.converters.StationDbConvertor
 import com.example.schedule.data.db.AppDatabase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -30,7 +31,7 @@ class ScheduleRepositoryImpl(
         transportTypes: String
         )
     : Flow<Resource<List<StationInfo>>> = flow {
-        val response = networkClient.doRequest(ScheduleRequest(
+        val response = networkClient.doRequestSuspend(ScheduleRequest(
             fromCode = fromCode,
             toCode = toCode,
             date = date,
@@ -64,11 +65,11 @@ class ScheduleRepositoryImpl(
         }
     }
 
-    override fun getAllStations(): Flow<Resource<List<StationCode>>> = flow {
+    override suspend fun getAllStations() {
         val response = networkClient.doRequest(AllScheduleRequest())
         when (response.resultCode) {
             -1 -> {
-                emit(Resource.Error("Проверьте подключение к интернету"))
+                Log.i("all_stations", "error")
             }
             200 -> {
                 with(response as AllScheduleResponse) {
@@ -77,23 +78,22 @@ class ScheduleRepositoryImpl(
                             region.settlements.flatMap { selltent ->
                                 selltent.stations.map { station ->
                                     StationCode(
-                                        esrCode = station.codes.esr_code,
-                                        yandexCode = station.codes.yandex_code,
-                                        direction = station.direction,
-                                        stationType = station.station_type,
-                                        title = station.title,
-                                        transportType = station.transport_type,
+                                        esrCode = station.codes.esr_code ?: "" ,
+                                        yandexCode = station.codes.yandex_code ?: "",
+                                        direction = station.direction ?: "",
+                                        stationType = station.station_type ?: "",
+                                        title = station.title ?: "",
+                                        transportType = station.transport_type ?: "",
                                     )
                                 }
                             }
                         }
                     }
                     saveStation(data)
-                    emit(Resource.Success(data))
                 }
             }
             else -> {
-                emit(Resource.Error("Ошибка сервера"))
+                Log.i("all_stations", "error network")
             }
         }
     }

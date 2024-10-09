@@ -134,6 +134,8 @@
         android:fontFamily="@font/ys_display_light"
         android:textFontWeight="500"
         android:textSize="@dimen/mark_12sp"
+        android:ellipsize="end"
+        android:maxLines="4"
         app:layout_constraintTop_toBottomOf="@id/start_time"
         app:layout_constraintStart_toStartOf="@id/middle_guideline"
         app:layout_constraintEnd_toStartOf="@id/guideline_66"/>
@@ -194,6 +196,8 @@
         android:fontFamily="@font/ys_display_light"
         android:textFontWeight="500"
         android:textSize="@dimen/mark_12sp"
+        android:ellipsize="end"
+        android:maxLines="4"
         app:layout_constraintTop_toBottomOf="@id/end_time"
         app:layout_constraintStart_toStartOf="@id/guideline_82"
         app:layout_constraintEnd_toEndOf="parent"/>

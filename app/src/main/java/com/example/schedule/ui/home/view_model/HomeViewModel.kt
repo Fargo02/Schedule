@@ -7,8 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.schedule.domain.api.ScheduleInteractor
 import com.example.schedule.domain.db.StationCodeInteractor
+import com.example.schedule.domain.model.StationCode
 import com.example.schedule.domain.model.StationInfo
 import com.example.schedule.ui.home.SearchState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 
 
@@ -17,8 +21,17 @@ class HomeViewModel(
     private val stationCodeInteractor: StationCodeInteractor,
 ): ViewModel() {
 
+//    init {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            valScheduleBetweenInteractor.getAllStations()
+//        }
+//    }
+
     private val stateLiveData = MutableLiveData<SearchState>()
     fun observeState() : LiveData<SearchState> = stateLiveData
+
+    private val stationCodeListener = MutableLiveData<Pair<StationCode, StationCode>>()
+    fun observeStationCodeListener() : LiveData<Pair<StationCode, StationCode>> = stationCodeListener
 
     fun requestToServer(fromCode: String, toCode: String, date: String, transportTypes: String) {
 
@@ -33,16 +46,17 @@ class HomeViewModel(
         }
     }
 
-//    fun getStationCode(stationName: String) {
-//
-//        viewModelScope.launch {
-//            stationCodeInteractor
-//                .getStationCode(stationName)
-//                .collect{ station ->
-//                    code = station.yandexCode
-//                }
-//        }
-//    }
+    fun getCode(from: String, to: String) {
+        viewModelScope.launch {
+            stationCodeInteractor
+                .getStationCode(from, to)
+                .collect { renderCode(it) }
+        }
+    }
+    private fun renderCode(stationsCode: Pair<StationCode, StationCode>) {
+        stationCodeListener.postValue(stationsCode)
+    }
+
 
     private fun processResult(foundRoutes: List<StationInfo>?, errorMessage: String?) {
         val routes = mutableListOf<StationInfo>()

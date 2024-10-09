@@ -63,6 +63,11 @@ class HomeFragment: Fragment(), DatePickerDialog.OnDateSetListener {
             render(it)
         }
 
+        viewModel.observeStationCodeListener().observe(viewLifecycleOwner) {
+            Log.i("testRequest", "from = ${it.first.yandexCode}, to = ${it.second.yandexCode}, date = $date, type = $transportType")
+            viewModel.requestToServer(it.first.yandexCode ?: "", it.second.yandexCode ?: "", date, transportType)
+        }
+
         binding.compareArrows.setOnClickListener {
             val temp = toCode
             toCode = fromCode
@@ -100,7 +105,8 @@ class HomeFragment: Fragment(), DatePickerDialog.OnDateSetListener {
                 binding.nothingFound.isVisible = true
                 binding.nothingFound.text = "Указаны не все данные"
             } else {
-                viewModel.requestToServer("s9879631", "s9600771", date, transportType)
+                binding.nothingFound.isVisible = false
+                viewModel.getCode(fromCode, toCode)
             }
         }
         //toCode = s9879631

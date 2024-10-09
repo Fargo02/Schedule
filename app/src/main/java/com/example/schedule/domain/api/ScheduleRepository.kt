@@ -13,5 +13,5 @@ interface ScheduleRepository {
         transportTypes: String)
     : Flow<Resource<List<StationInfo>>>
 
-    fun getAllStations(): Flow<Resource<List<StationCode>>>
+    suspend fun getAllStations()
 }

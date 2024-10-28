@@ -1,14 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     tools:context=".ui.home.fragment.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left_guideline_16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/mark_16dp" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/right_guideline_16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/mark_16dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/listGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_tags="btn_today, btn_tomorrow,
+        btn_date, btn_any, btn_plane, btn_train, btn_suburban, btn_bus, btn_found"/>
+
+    <TextView
+        android:id="@+id/schedule"
+        app:layout_constraintTag="schedule"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mark_16dp"
+        android:text="@string/schedule_trails"
+        android:textSize="@dimen/mark_20sp"
+        android:fontFamily="@font/ys_display_bold"
+        android:textFontWeight="800"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/left_guideline_16dp"
+        app:layout_constraintEnd_toStartOf="@id/right_guideline_16dp"
+        android:visibility="visible"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/from_to"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mark_16dp"
+        app:layout_constraintTop_toBottomOf="@id/schedule"
+        app:layout_constraintStart_toStartOf="@id/left_guideline_16dp"
+        app:layout_constraintEnd_toStartOf="@id/right_guideline_16dp"
+        android:background="@drawable/my_border">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_guideline_10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/mark_10dp" />
+        <EditText
+            android:id="@+id/edit_text_from"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:inputType="text"
+            android:textSize="@dimen/mark_18sp"
+            android:lines="1"
+            android:imeOptions="actionDone"
+            android:layout_margin="@dimen/mark_12dp"
+            android:singleLine="true"
+            android:hint="@string/from"
+            android:maxLength="25"
+            android:importantForAutofill="yes"
+            app:layout_constraintStart_toStartOf="@id/left_guideline_10dp"
+            app:layout_constraintEnd_toEndOf="@id/divider"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/divider"/>
+        <View
+            android:id="@+id/divider"
+            android:layout_width="@dimen/mark_0dp"
+            android:layout_height="@dimen/mark_1dp"
+            android:layout_marginStart="@dimen/mark_12dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_from"
+            app:layout_constraintBottom_toTopOf="@id/edit_text_to"
+            app:layout_constraintStart_toStartOf="@id/left_guideline_10dp"
+            app:layout_constraintEnd_toStartOf="@id/compare_arrows"/>
+        <EditText
+            android:id="@+id/edit_text_to"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textSize="@dimen/mark_18sp"
+            android:lines="1"
+            android:background="@color/white"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:hint="@string/where"
+            android:layout_margin="@dimen/mark_12dp"
+            android:maxLength="25"
+            android:importantForAutofill="no"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintStart_toStartOf="@id/left_guideline_10dp"
+            app:layout_constraintEnd_toEndOf="@id/divider"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <ImageView
+            android:id="@+id/compare_arrows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/compare_arrows_ic"
+            android:clickable="true"
+            android:layout_marginEnd="@dimen/mark_16dp"
+            android:layout_marginStart="@dimen/mark_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/divider"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_today"
+        app:layout_constraintTag="btn_today"
+        android:layout_width="@dimen/mark_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mark_16dp"
+        android:background="@drawable/button_start_radius"
+        android:text="@string/today"
+        android:textColor="@color/black"
+        android:fontFamily="@font/ys_display_medium"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toStartOf="@+id/btn_tomorrow"
+        app:layout_constraintStart_toStartOf="@id/left_guideline_16dp"
+        app:layout_constraintTop_toBottomOf="@id/from_to" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_tomorrow"
+        app:layout_constraintTag="btn_tomorrow"
+        android:layout_width="@dimen/mark_0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_without_radius"
+        android:text="@string/tomorrow"
+        android:textColor="@color/black"
+        android:fontFamily="@font/ys_display_medium"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_today"
+        app:layout_constraintEnd_toStartOf="@+id/btn_date"
+        app:layout_constraintStart_toEndOf="@+id/btn_today" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_date"
+        app:layout_constraintTag="btn_date"
+        android:layout_width="@dimen/mark_0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_end_radius"
+        android:text="@string/date"
+        android:textColor="@color/black"
+        android:fontFamily="@font/ys_display_medium"
+        android:drawableEnd="@drawable/calendar_ic"
+        android:drawablePadding="-16dp"
+        android:paddingEnd="@dimen/mark_16dp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_tomorrow"
+        app:layout_constraintEnd_toStartOf="@+id/right_guideline_16dp"
+        app:layout_constraintStart_toEndOf="@+id/btn_tomorrow" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_any"
+        app:layout_constraintTag="btn_any"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mark_16dp"
+        android:background="@drawable/button_full_radius"
+        android:text="@string/any"
+        android:textColor="@color/black"
+        android:fontFamily="@font/ys_display_medium"
+        android:textAllCaps="false"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@+id/btn_plane"
+        app:layout_constraintStart_toEndOf="@id/left_guideline_16dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_today" />
+
+    <ImageButton
+        android:id="@+id/btn_plane"
+        app:layout_constraintTag="btn_plane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/plane_ic"
+        android:padding="12dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:paddingStart="@dimen/mark_18dp"
+        android:paddingEnd="@dimen/mark_18dp"
+        android:background="@drawable/button_full_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_any"
+        app:layout_constraintEnd_toStartOf="@+id/btn_train"
+        app:layout_constraintStart_toEndOf="@+id/btn_any" />
+
+    <ImageButton
+        android:id="@+id/btn_train"
+        app:layout_constraintTag="btn_train"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/suburban_ic"
+        android:padding="12dp"
+        android:paddingStart="@dimen/mark_18dp"
+        android:paddingEnd="@dimen/mark_18dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@drawable/button_full_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_plane"
+        app:layout_constraintEnd_toStartOf="@+id/btn_suburban"
+        app:layout_constraintStart_toEndOf="@+id/btn_plane" />
+
+    <ImageButton
+        android:id="@+id/btn_suburban"
+        app:layout_constraintTag="btn_suburban"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/suburban_ic"
+        android:padding="12dp"
+        android:paddingStart="@dimen/mark_18dp"
+        android:paddingEnd="@dimen/mark_18dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@drawable/button_full_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_train"
+        app:layout_constraintEnd_toStartOf="@+id/btn_bus"
+        app:layout_constraintStart_toEndOf="@+id/btn_train" />
+
+    <ImageButton
+        android:id="@+id/btn_bus"
+        app:layout_constraintTag="btn_bus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bus_ic"
+        android:padding="12dp"
+        android:paddingStart="@dimen/mark_18dp"
+        android:paddingEnd="@dimen/mark_18dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@drawable/button_full_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_suburban"
+        app:layout_constraintEnd_toStartOf="@+id/right_guideline_16dp"
+        app:layout_constraintStart_toEndOf="@+id/btn_suburban" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_found"
+        app:layout_constraintTag="btn_found"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mark_16dp"
+        android:background="@drawable/button_full_radius"
+        android:backgroundTint="@color/yellow"
+        android:text="@string/found"
+        android:textColor="@color/black"
+        android:fontFamily="@font/ys_display_medium"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@id/left_guideline_16dp"
+        app:layout_constraintEnd_toStartOf="@id/right_guideline_16dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_any" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/routeList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mark_16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="13"
+        tools:listitem="@layout/result_item"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintTop_toBottomOf="@id/btn_found"
+        app:layout_constraintStart_toEndOf="@id/left_guideline_16dp"
+        app:layout_constraintEnd_toStartOf="@id/right_guideline_16dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="@dimen/mark_44dp"
+        android:layout_height="@dimen/mark_44dp"
+        android:indeterminateTint="@color/yellow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/nothingFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="@string/nothing_found"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_found"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
